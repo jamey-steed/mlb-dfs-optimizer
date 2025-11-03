@@ -240,7 +240,7 @@ def main(
         )
 
         if is_hybrid_build:
-            with open("field_lineups.pkl", "rb") as f:
+            with open("output_data/field_lineups.pkl", "rb") as f:
                 raw_lineups = pickle.load(f)
 
             valid_ids = set(player_metadata.keys())
@@ -410,7 +410,7 @@ def main(
             )
             if is_hybrid_build:
                 lineups += raw_lineups
-            with open("field_lineups.pkl", "wb") as f:
+            with open("output_data/field_lineups.pkl", "wb") as f:
                 pickle.dump(lineups, f)
 
             solver_elapsed = solver_end_time - solver_start_time
@@ -421,7 +421,7 @@ def main(
         else:
             from pickle import load
 
-            with open("field_lineups.pkl", "rb") as f:
+            with open("output_data/field_lineups.pkl", "rb") as f:
                 lineups = load(f)
         # === Run Evolutionary Optimization ===
         # from run_evolution import run_evolution

@@ -42,19 +42,19 @@ def build_from_lambda(
             lineups = result_body["lineups"]
             import pickle
 
-            with open("field_lineups.pkl", "wb") as f:
+            with open("output_data/field_lineups.pkl", "wb") as f:
                 pickle.dump(lineups, f)
         elif "presigned_url" in result_body:
             print("calling s3")
 
             url = result_body["presigned_url"]
             response = requests.get(url, stream=True)
-            with open("field_lineups.pkl", "wb") as f:
+            with open("output_data/field_lineups.pkl", "wb") as f:
                 response.raw.decode_content = True
                 shutil.copyfileobj(response.raw, f)
-            with open("field_lineups.pkl", "rb") as f:
+            with open("output_data/field_lineups.pkl", "rb") as f:
                 lineups = pickle.load(f)["lineups"]
-            with open("field_lineups.pkl", "wb") as f:
+            with open("output_data/field_lineups.pkl", "wb") as f:
                 pickle.dump(lineups, f)
             # print(lineups)
         return lineups
@@ -82,7 +82,7 @@ def build_from_lambda(
             remaining_lineups = result_body["remaining_lineups"]
             import pickle
 
-            with open("field_lineups.pkl", "wb") as f:
+            with open("output_data/field_lineups.pkl", "wb") as f:
                 pickle.dump(field_lineups, f)
             with open("remaining_lineups.pkl", "wb") as f:
                 pickle.dump(remaining_lineups, f)
@@ -91,12 +91,12 @@ def build_from_lambda(
 
             url = result_body["presigned_url"]
             response = requests.get(url, stream=True)
-            with open("field_lineups.pkl", "wb") as f:
+            with open("output_data/field_lineups.pkl", "wb") as f:
                 response.raw.decode_content = True
                 shutil.copyfileobj(response.raw, f)
-            with open("field_lineups.pkl", "rb") as f:
+            with open("output_data/field_lineups.pkl", "rb") as f:
                 lineups = pickle.load(f)["lineups"]
-            with open("field_lineups.pkl", "wb") as f:
+            with open("output_data/field_lineups.pkl", "wb") as f:
                 pickle.dump(lineups, f)
             # print(lineups)
         return field_lineups, remaining_lineups
