@@ -7,7 +7,20 @@
 
 ## Overview
 
-This repository contains a **simulation and optimization framework** for DraftKings MLB daily fantasy sports (DFS).
+### 🏈 What is DraftKings and DFS?
+[**DraftKings**](https://www.draftkings.com) is a daily fantasy sports (DFS) platform where users build virtual lineups of real-world athletes under a fixed salary cap.  
+Each player earns **fantasy points** based on their real-game performance, and contests are structured like large tournaments with thousands of competitors.  
+
+From a technical perspective, DFS lineup generation is a **combinatorial optimization problem** with stochastic scoring:
+- Each lineup must satisfy **strict constraints** (salary cap, roster positions, team limits, etc.).
+- Player outcomes follow **probabilistic distributions** derived from projections and/or simulations.
+- Some of the challenges include:
+  - Finding actual distributions of outcomes for the given sporting event(s).
+  - Projecting and modeling how other people (the field) will behave in these contests.
+  - Optimizing **expected value (EV)** - or whatever metric you care about - while maintaining **diversity** across thousands of lineups, similar to portfolio optimization in finance.
+  - ...
+
+This project abstracts and demonstrates the simulation and optimization components that solve that problem at scale.
 It demonstrates large-scale lineup generation, ownership-aware field modeling, and basic Monte Carlo–based game simulations.
 
 Originally part of a larger proprietary system, this version has been **abstracted and sanitized** to not reveal any private data sources or strategy logic, so I would not recommend using it in production. Additionally, the actual lineup/field optimization step is done through AWS lambda fanout, described in detail below.
